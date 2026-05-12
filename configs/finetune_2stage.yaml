@@ -1,0 +1,31 @@
+# EquiSSL Two-Stage Finetuning Configuration
+# Stage 1: Freeze encoder, train decoder only (50 epochs)
+# Stage 2: Full fine-tune all parameters (350 epochs)
+# Recipe reference for 2-stage SSL-init finetune (stage1 freeze + stage2 full)
+
+stage1:
+  epochs: 50
+  lr: 5.0e-4
+  min_lr: 1.0e-6
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: true
+  load_decoder: true
+
+stage2:
+  epochs: 350
+  lr: 1.0e-4
+  min_lr: 1.0e-6
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: false
+  load_decoder: true
+
+loss:
+  type: "cross_entropy"
+  ignore_index: 0
+
+eval:
+  pose35_max_angle: 35.0
+  pose35_num_rotations: 10
+  pose35_num_repeats: 3
