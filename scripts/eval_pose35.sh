@@ -1,10 +1,15 @@
 #!/bin/bash
-# EquiSSL Pose35 SO(3) Robustness Evaluation
+# EquiSSL SO(3) Rotation-Robustness Evaluation
+#
+# Paper-default angle: theta_max = 90 degrees (--max_angle 90.0 below).
+# The script name (eval_pose35) is a historical artefact of the original
+# +/-35 degree sweep and is retained for backward compatibility with
+# checkpoint metadata.
 #
 # Usage:
 #   bash scripts/eval_pose35.sh <checkpoint> [gpu_id] [split]
-#   bash scripts/eval_pose35.sh outputs/finetune_v5_2stage_ft/best_model.pth 0 val
-#   bash scripts/eval_pose35.sh outputs/finetune_v5_2stage_ft/best_model.pth 0 test
+#   bash scripts/eval_pose35.sh outputs/<run>/best_model.pth 0 val
+#   bash scripts/eval_pose35.sh outputs/<run>/best_model.pth 0 test
 
 set -e
 cd "$(dirname "$0")/.."
@@ -22,17 +27,18 @@ OUT_DIR=$(dirname "${CHECKPOINT}")
 LOG_FILE="${OUT_DIR}/pose35_${SPLIT}.log"
 
 echo "============================================"
-echo "EquiSSL Pose35 SO(3) Evaluation"
+echo "EquiSSL SO(3) Rotation-Robustness Evaluation"
 echo "  Checkpoint: ${CHECKPOINT}"
 echo "  GPU: ${GPU}"
 echo "  Split: ${SPLIT}"
+echo "  theta_max: 90.0 deg (paper default)"
 echo "  Start: $(date)"
 echo "============================================"
 
 python tools/eval_pose35.py \
     --checkpoint "${CHECKPOINT}" \
     --config configs/pretrain.yaml \
-    --max_angle 35.0 \
+    --max_angle 90.0 \
     --num_rotations 10 \
     --num_repeats 3 \
     --batch_size 4 \

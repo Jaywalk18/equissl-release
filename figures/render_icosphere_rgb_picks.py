@@ -1,9 +1,7 @@
 """Render icosphere RGB views for multiple Stanford2D3D val samples.
 
-Quick browser for the author to pick a non-Japanese-looking scene as
-the replacement for `image.png` / `figures/figs/real_icosphere_rgb.png`
-(currently val idx=28 which has a corridor-with-wooden-doors look the
-author dislikes).
+Quick browser for picking a representative scene as the replacement
+for `image.png` / `figures/figs/real_icosphere_rgb.png`.
 
 Re-uses the supersample + antialiased + LANCZOS pipeline from
 render_clean_spheres.py: SEG_RANK=6, AA=True, 2× supersample, then

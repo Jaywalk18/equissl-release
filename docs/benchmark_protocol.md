@@ -23,10 +23,14 @@ Splits follow SphereUFormer's official partition (Area 5 as test).
 - Class 0 (unknown) is ignored
 - Evaluated on the model's best checkpoint (selected by val mIoU)
 
-### 3.2 SO(3) mIoU (Pose35)
-- Apply random SO(3) rotations (max angle ±35°) to input
-- 10 random rotations per sample, 3 repeats
+### 3.2 SO(3) mIoU (rotation evaluation)
+- Apply random SO(3) rotations (max angle ±θ_max) to input
+- Paper default: **θ_max = 90°**, 10 random rotations per sample, 3 repeats
+- Smaller-angle sweeps (e.g., θ_max = 35°) use the same script with `--max_angle 35.0`
 - Report mean ± std across repeats
+- Historical note: the evaluation script is named `eval_pose35.py` for backward
+  compatibility; the script is parametric in `--max_angle` and the paper headline
+  uses 90°
 
 ### 3.3 Rotation Drop
 - `Drop = (Base mIoU - SO(3) mIoU) / Base mIoU × 100%`
@@ -39,11 +43,15 @@ Splits follow SphereUFormer's official partition (Area 5 as test).
 ## 4. Evaluation Commands
 
 ```bash
-# Pose35 evaluation (val)
+# Rotation evaluation at the paper-default θ_max = 90° (val)
 bash scripts/eval_pose35.sh <checkpoint> <gpu_id> val
 
-# Pose35 evaluation (test)
+# Rotation evaluation at the paper-default θ_max = 90° (test)
 bash scripts/eval_pose35.sh <checkpoint> <gpu_id> test
+
+# Or directly via the Python entry point with an explicit angle:
+python tools/eval_pose35.py \
+    --checkpoint <ckpt> --max_angle 90.0 --num_rotations 10 --num_repeats 3
 ```
 
 ## 5. Experiment Naming Convention

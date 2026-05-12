@@ -1,9 +1,9 @@
 """Clean per-method icosphere PNGs for PPT redraw (Fig 1 / Fig 2).
 
-Per `paper/prompts/server_prompt_clean_spheres.md`: dump single-cell
-PNGs the author can drop into PowerPoint without cropping the existing
-multi-method video frames (which have neighbouring spheres bleeding in
-and a `pixel acc. = X.XXX` annotation overlay).
+Dumps single-cell PNGs that can be dropped into PowerPoint without
+cropping the existing multi-method video frames (which have
+neighbouring spheres bleeding in and a `pixel acc. = X.XXX`
+annotation overlay).
 
 Re-uses the rendering infrastructure from
 `render_rotation_video_multi.py` (precompute_context, render_sphere,
