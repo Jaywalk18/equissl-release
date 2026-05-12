@@ -1,5 +1,7 @@
 # EquiSSL — Anonymous Code Release
 
+### *Gauge-Equivariant Attention for Rotation-Stable 360° Scene Understanding*
+
 Anonymous code release accompanying a double-blind submission to **SIGGRAPH
 Asia 2026 Technical Papers** (Journal track / ACM TOG). Author identity is
 withheld during review and will be disclosed in the camera-ready release.
