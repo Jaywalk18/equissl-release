@@ -1,10 +1,9 @@
-# EquiSSL — Anonymous Code Release
+# EquiSSL — Gauge-Equivariant Attention for Rotation-Stable 360° Scene Understanding
 
-### *Gauge-Equivariant Attention for Rotation-Stable 360° Scene Understanding*
-
-Anonymous code release accompanying a double-blind submission to **SIGGRAPH
-Asia 2026 Technical Papers** (Journal track / ACM TOG). Author identity is
-withheld during review and will be disclosed in the camera-ready release.
+Official code release for the paper **"Gauge-Equivariant Attention for
+Rotation-Stable 360° Scene Understanding"**, accepted to **ACM Transactions
+on Graphics** (SIGGRAPH Asia 2026 Journal Track), Vol. 45, No. 6, Article
+242. DOI: [10.1145/3842525](https://doi.org/10.1145/3842525).
 
 ## Motivation
 
@@ -105,15 +104,6 @@ machinery. The reference implementation lives at
 and is a near-drop-in replacement for the Swin-style 2-D RPE bias used in
 icosphere transformers.
 
-## Anonymity
-
-This release is scrubbed for double-blind compliance: no author names,
-institutions, server hostnames, personal filesystem paths, account
-identifiers, or acknowledgements appear in code, comments, or
-configuration. Output directories, dataset roots, and the SphereUFormer
-source root are referenced via the environment variables listed in
-"Setup".
-
 ## License
 
-To be specified in the camera-ready release.
+Released under the [MIT License](LICENSE).
