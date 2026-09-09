@@ -1,0 +1,21 @@
+# EquiSSL Single-Stage Full Finetuning Configuration
+# Full fine-tune all parameters for 400 epochs
+# Reference: v5 full val mIoU 60.38
+
+finetune:
+  epochs: 400
+  lr: 1.0e-4
+  min_lr: 1.0e-6
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: false
+  load_decoder: true
+
+loss:
+  type: "cross_entropy"
+  ignore_index: 0
+
+eval:
+  pose35_max_angle: 35.0
+  pose35_num_rotations: 10
+  pose35_num_repeats: 3

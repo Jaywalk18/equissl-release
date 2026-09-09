@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  If you use EquiSSL in your research, please cite the accompanying paper.
+title: "EquiSSL: Gauge-Equivariant Attention for Rotation-Stable 360° Scene Understanding"
+authors:
+  - family-names: Zhou
+    given-names: Tianjian
+    affiliation: "College of Systems Engineering, National University of Defense Technology"
+  - family-names: Li
+    given-names: Yishan
+    affiliation: "College of Systems Engineering, National University of Defense Technology"
+  - family-names: Jiang
+    given-names: Jie
+    affiliation: "College of Systems Engineering, National University of Defense Technology"
+  - family-names: Zhang
+    given-names: Yifei
+    affiliation: "Northwestern Polytechnical University"
+doi: 10.1145/3842525
+version: 1.0.0
+date-released: "2026-09-03"
+repository-code: "https://github.com/Jaywalk18/equissl-release"
+keywords:
+  - self-supervised learning
+  - equivariance
+  - 360 scene understanding
+  - ACM Transactions on Graphics
+  - SIGGRAPH Asia 2026

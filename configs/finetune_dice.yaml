@@ -1,0 +1,25 @@
+# EquiSSL Finetune with Dice Loss Auxiliary
+# CE + Dice hybrid loss for better boundary segmentation
+# Dice loss is class-balanced by design
+
+stage1:
+  epochs: 50
+  lr: 5.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: true
+  load_decoder: true
+
+stage2:
+  epochs: 350
+  lr: 1.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: false
+  load_decoder: true
+
+loss:
+  type: "ce_dice"
+  ce_weight: 1.0
+  dice_weight: 0.5
+  ignore_index: 0

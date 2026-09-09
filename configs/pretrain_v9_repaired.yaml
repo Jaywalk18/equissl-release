@@ -1,0 +1,71 @@
+# EquiSSL v9 Pretraining — Anti-Collapse Repair Recipe
+# Diagnosed issue (2026-04-25): pretrain_v8 collapsed at deep stages
+#   bottleneck eff_rank 15/768, pairwise cos 0.997 (vs random 95/768, 0.51).
+# Fixes vs v8:
+#   - out_dim 65536 -> 8192   (smaller proj head, less collapse room for 18k images)
+#   - mask_ratio 0.75 -> 0.5  (more student signal)
+#   - center_momentum 0.9 -> 0.95  (slower center drift = stronger anti-collapse)
+#   - koleo_weight 0.1 (NEW): DINOv2 anti-collapse regularizer on student bottleneck
+# Architecture identical to v8 (35.1M, embed 48, [2,2,6,2], C6 area-weighted).
+
+model:
+  img_rank: 7
+  node_type: "vertex"
+  embed_dim: 48
+  num_scales: 4
+  in_scale_factor: 2
+  enc_depths: [2, 2, 6, 2]
+  bottleneck_depth: 2
+  enc_num_heads: [3, 6, 12, 24]
+  dec_depths: [2, 2, 2, 2]
+  dec_num_heads: [24, 24, 12, 6]
+  d_head_coef: 2
+  win_size_coef: 2
+  mlp_ratio: 4.0
+  qkv_bias: true
+  drop_path_rate: 0.15
+  abs_pos_enc_in: false
+  abs_pos_enc: false
+  rel_pos_bias: true
+  rel_pos_bias_size: 7
+  equivariant_rpe: true
+  n_gauges: 6
+  area_weighted: true
+
+ssl:
+  proj_dim: 256
+  out_dim: 8192            # was 65536
+  mask_ratio: 0.5          # was 0.75
+  teacher_momentum: 0.996
+  teacher_temp: 0.04
+  student_temp: 0.1
+  center_momentum: 0.95    # was 0.9
+  cls_weight: 1.0
+  patch_weight: 1.0
+  recon_weight: 1.0
+  koleo_weight: 0.1        # NEW — anti-collapse
+
+data:
+  root_dir: "${WORKSPACE}/Structured3D"
+  image_key: "rgb_rawlight"
+  normalize_mean: 0.5
+  normalize_std: 0.225
+  color_augment: true
+  num_workers: 16
+
+training:
+  epochs: 100
+  batch_size: 8
+  gradient_accumulation: 4
+  lr: 5.0e-4
+  min_lr: 1.0e-6
+  weight_decay: 0.04
+  warmup_epochs: 10
+  teacher_momentum_end: 1.0
+  clip_grad: 3.0
+  save_freq: 10
+  log_interval: 50
+
+output:
+  dir: "outputs/pretrain_v9"
+  wandb: false

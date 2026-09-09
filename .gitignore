@@ -1,0 +1,33 @@
+# Outputs and checkpoints (not part of the source release)
+outputs/
+*.pt
+*.pth
+*.ckpt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+tmp/
+.tmp/
+
+# Large data (must be provided externally — see README setup section)
+/data/
+*.npy

@@ -1,0 +1,24 @@
+# EquiSSL Finetune with Class-Balanced CE
+# Inverse-frequency weighting to boost rare classes
+# Target: beam, column, door, sofa (IoU < 3%)
+
+stage1:
+  epochs: 50
+  lr: 5.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: true
+  load_decoder: true
+
+stage2:
+  epochs: 350
+  lr: 1.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: false
+  load_decoder: true
+
+loss:
+  type: "cross_entropy_weighted"
+  class_weight_mode: "inverse_freq"  # compute from training set
+  ignore_index: 0

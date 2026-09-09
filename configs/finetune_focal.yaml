@@ -1,0 +1,25 @@
+# EquiSSL Finetune with Focal Loss
+# Addresses small-class IoU collapse (beam 0.5%, column 1%, door 2.9%)
+# Focal loss down-weights easy examples, focuses on hard ones
+
+stage1:
+  epochs: 50
+  lr: 5.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: true
+  load_decoder: true
+
+stage2:
+  epochs: 350
+  lr: 1.0e-4
+  batch_size: 8
+  num_workers: 8
+  freeze_encoder: false
+  load_decoder: true
+
+loss:
+  type: "focal"
+  gamma: 2.0
+  alpha: null  # uniform; set per-class weights if needed
+  ignore_index: 0
